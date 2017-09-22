@@ -2,7 +2,10 @@ package kh.com.dto;
 
 import java.io.Serializable;
 
-public class Users implements Serializable {
+import org.apache.ibatis.type.Alias;
+
+@Alias("UsersDto")
+public class UsersDto implements Serializable {
 	private static final long serialVersionUID = 7676251580300482326L;
 	
 	private String userId;
@@ -13,6 +16,18 @@ public class Users implements Serializable {
 	private int userAuth;
 	private int majorNumber;
 	private int userStatus;
+	
+	
+	//디폴드값 제외 생성자
+	public UsersDto(String userId, String userPw, String userEmail, String userPhone, String userAddress) {
+		super();
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userAddress = userAddress;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
