@@ -41,13 +41,4 @@
 		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
 	</beans:bean>
 	
-	
-	<!-- MyClass cls = new MyClass()
-	name 변수 = "홍길동"
-	<beans:bean id="cls" class="kh.com.MyClass">
-		<beans:property name="name" value="홍길동">
-			<beans:value>홍길동</beans:value>		
-		</beans:property>
-	</beans:bean> -->	
-	
 </beans:beans>

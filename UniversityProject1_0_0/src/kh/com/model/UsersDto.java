@@ -1,4 +1,4 @@
-package kh.com.dto;
+package kh.com.model;
 
 import java.io.Serializable;
 

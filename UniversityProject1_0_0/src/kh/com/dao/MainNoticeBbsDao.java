@@ -2,7 +2,7 @@ package kh.com.dao;
 
 import java.util.List;
 
-import kh.com.dto.MainNoticeBbsDto;
+import kh.com.model.MainNoticeBbsDto;
 
 public interface MainNoticeBbsDao {
 	

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.dao.MainNoticeBbsDao;
-import kh.com.dto.MainNoticeBbsDto;
+import kh.com.model.MainNoticeBbsDto;
 
 @Repository
 public class MainNoticeBbsDaoImpl implements MainNoticeBbsDao {
