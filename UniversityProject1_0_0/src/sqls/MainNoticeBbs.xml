@@ -6,5 +6,13 @@
 	<select id="getBbsList" resultType="MainNoticeBbsDto">
 		SELECT * 
 		FROM MAIN_NOTICE_BBS
-	</select>	 
+	</select>
+	<insert id="insertBbs" parameterType="MainNoticeBbsDto">
+		INSERT INTO MAIN_NOTICE_BBS(
+			NOTICE_BBS_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, FILENAME, ORG_FILENAME, WDATE
+		)
+		VALUES(
+			NOTICE_BBS_SEQ.NEXTVAL, #{userId}, #{title}, #{content}, 0, #{fileName}, #{orgFileName}, SYSDATE
+		)
+	</insert>
 </mapper>

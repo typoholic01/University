@@ -20,7 +20,11 @@ public class MainNoticeBbsDaoImpl implements MainNoticeBbsDao {
 	public List<MainNoticeBbsDto> getBbsList() {
 		return sqlSession.selectList(ns+"getBbsList");
 	}
-	
-	
 
+	@Override
+	public boolean insertBbs(MainNoticeBbsDto dto) {
+		
+		return sqlSession.insert(ns + "insertBbs", dto) > 0 ? true:false;
+		
+	}	
 }

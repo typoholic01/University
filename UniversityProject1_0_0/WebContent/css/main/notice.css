@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.button-group .arc-comment a {
+	color: #333;
+	font-size: 15px;
+    text-decoration: none;
+	}
+.button-group .arc-comment a:hover {
+	text-decoration: none;color: #ff1515;
+}
+
+.button-group {
+	float: right;
+}
+	

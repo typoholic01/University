@@ -20,4 +20,9 @@ public class MainNoticeBbsServiceImpl implements MainNoticeBbsService {
 		return dao.getBbsList();
 	}
 
+	@Override
+	public boolean insertBbs(MainNoticeBbsDto dto) {
+		return dao.insertBbs(dto);
+	}
+
 }

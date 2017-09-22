@@ -33,7 +33,7 @@
 				data-toggle="collapse" data-target="#bs-navbar-collapse">
 				<span class="sr-only">Toggle Navigation</span> <i class="fa fa-bars"></i>
 			</button>
-			<a href="main.do" class="navbar-brand"> <img src="${pageContext.request.contextPath }/img/logo.png" alt="Post" style="width:183px;">
+			<a href="main.do" class="navbar-brand"> <img src="./img/logo.png" alt="Post" style="width:183px;">
 			</a>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-navbar-collapse">

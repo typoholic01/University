@@ -3,12 +3,36 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-<!-- 메인영역 -->
-<definition name="main.tiles" template="/WEB-INF/views/layouts-tiles.jsp">
+<!-- ※ 메인과 서브를 나눈 이유 : 메인과 서브페이지 레이아웃 구조가 달라서 이렇게 나누어놓았어요. -->
+
+<!-- 메인영역  : 메인안에서 이루어지는 영역은 main.tiles를 extends 하시면되요 -->
+<definition name="main.tiles" template="/WEB-INF/views/main_layouts-tiles.jsp">
 	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
 	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
 	<put-attribute name="main" value="/WEB-INF/views/common/main.jsp"/>
 	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+<!-- 서브영역 : 서브 안에서 이루어지는 영역응ㄴ sub.tiles를 extends 하시면되요 -->
+<definition name="sub.tiles" template="/WEB-INF/views/sub_layouts-tiles.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/common/sub_section.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/common/sub_right_menu.jsp"/>
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+<!-- 		대문 공지 게시판 		-->
+<!-- 	리스트	 -->
+<definition name="mainNotice.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/NoticeBbsList.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/notice/NoticeRightMenu.jsp"/>	
+</definition>
+<!-- 	글쓰기	 -->
+<definition name="mainNoticeWrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/Write.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/notice/NoticeRightMenu.jsp"/>	
 </definition>
 
 </tiles-definitions>

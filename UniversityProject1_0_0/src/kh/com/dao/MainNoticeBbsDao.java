@@ -8,4 +8,6 @@ public interface MainNoticeBbsDao {
 	
 	List<MainNoticeBbsDto> getBbsList();
 
+	boolean insertBbs(MainNoticeBbsDto dto);
+
 }
