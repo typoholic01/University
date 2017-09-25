@@ -31,7 +31,12 @@
 </definition>
 <!-- 	글쓰기	 -->
 <definition name="mainNoticeWrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/Write.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/NoticeBbsWrite.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/notice/NoticeRightMenu.jsp"/>	
+</definition>
+<!-- 	디테일	 -->
+<definition name="mainNoticeDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/NoticeBbsDetail.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/notice/NoticeRightMenu.jsp"/>	
 </definition>
 

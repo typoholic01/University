@@ -3,11 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="MainNoticeBbs">
-	<select id="getBbsList" resultType="MainNoticeBbsDto">
-		SELECT * 
+	<!-- 게시물들 가져오기 -->
+	<select id="getBbsList" resultType="MainNoticeBbsDto" parameterType="kh.com.util.Pagination">
+		SELECT 
+			NOTICE_BBS_SEQ as noticeBbsSeq,
+			USER_ID as userId,
+			TITLE,
+			CONTENT,
+			READCOUNT,
+			FILENAME,
+			ORG_FILENAME as orgFileName,
+			WDATE
+		FROM (
+				SELECT NOTICE_BBS_SEQ,USER_ID,TITLE,CONTENT,READCOUNT,FILENAME,
+				ORG_FILENAME,WDATE, ROW_NUMBER() OVER (ORDER BY NOTICE_BBS_SEQ desc) R
+				FROM MAIN_NOTICE_BBS
+		)
+		WHERE R BETWEEN #{startArticle} and #{endArticle}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="getBbs" resultType="MainNoticeBbsDto" parameterType="Integer">
+		SELECT 
+			NOTICE_BBS_SEQ as noticeBbsSeq,
+			USER_ID as userId,
+			TITLE,
+			CONTENT,
+			READCOUNT,
+			FILENAME,
+			ORG_FILENAME as orgFileName,
+			WDATE
+		FROM MAIN_NOTICE_BBS
+		WHERE NOTICE_BBS_SEQ = #{noticeBbsSeq}
+	</select>
+	
+	<!-- 총 게시물 수 가져오기 -->
+	<select id="getTotalArticle" resultType="Integer">
+		SELECT NVL(COUNT(NOTICE_BBS_SEQ), 0)
 		FROM MAIN_NOTICE_BBS
 	</select>
-	<insert id="insertBbs" parameterType="MainNoticeBbsDto">
+	
+	<!-- 게시물 입력 -->
+	<insert id="insertBbs" parameterType="MainNoticeBbsDto" useGeneratedKeys="false">
 		INSERT INTO MAIN_NOTICE_BBS(
 			NOTICE_BBS_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, FILENAME, ORG_FILENAME, WDATE
 		)

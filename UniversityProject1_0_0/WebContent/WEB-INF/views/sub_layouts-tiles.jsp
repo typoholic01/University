@@ -33,10 +33,3 @@
 	<tiles:insertAttribute name="bottom_inc"/>		
 </body>
 </html>
-
-
-
-
-
-
-

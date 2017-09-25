@@ -10,7 +10,7 @@
 	<div class="widget">
 		<h4>게시판 목록</h4>
 		<ul>
-			<li class="current"><a href="#" title="">공지게시판</a></li>
+			<li class="current"><a href="../notice/list.do" title="">공지게시판</a></li>
 			<li><a href="#" title="">자유게시판</a></li>
 		</ul>
 	</div>
