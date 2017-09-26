@@ -16,6 +16,8 @@ public class MainNoticeBbsDto implements Serializable {
 	private String fileName;
 	private String orgFileName;
 	private String wDate;
+	private int status;
+	
 	public int getNoticeBbsSeq() {
 		return noticeBbsSeq;
 	}
@@ -64,11 +66,18 @@ public class MainNoticeBbsDto implements Serializable {
 	public void setwDate(String wDate) {
 		this.wDate = wDate;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	
 	@Override
 	public String toString() {
-		return "MainNoticeBbs [noticeBbsSeq=" + noticeBbsSeq + ", userId=" + userId + ", title=" + title + ", content="
-				+ content + ", readCount=" + readCount + ", fileName=" + fileName + ", orgFileName=" + orgFileName
-				+ ", wDate=" + wDate + "]";
+		return "MainNoticeBbsDto [noticeBbsSeq=" + noticeBbsSeq + ", userId=" + userId + ", title=" + title
+				+ ", content=" + content + ", readCount=" + readCount + ", fileName=" + fileName + ", orgFileName="
+				+ orgFileName + ", wDate=" + wDate + ", status=" + status + "]";
 	}
+	
 }

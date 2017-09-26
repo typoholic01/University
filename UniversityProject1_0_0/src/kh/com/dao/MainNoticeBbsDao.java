@@ -15,4 +15,8 @@ public interface MainNoticeBbsDao {
 
 	MainNoticeBbsDto getBbs(int seq);
 
+	boolean deleteArticle(int seq);
+
+	boolean updateArticle(MainNoticeBbsDto bbs);
+
 }

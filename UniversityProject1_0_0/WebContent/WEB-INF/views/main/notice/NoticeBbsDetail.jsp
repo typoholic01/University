@@ -28,7 +28,7 @@
                 <span>${bbs.content }</span>                
             </div>            
             <div class="panel-footer">
-                <span class="label label-default">수정</span> <span class="label label-default">삭제</span>
+                <span class="label label-default"><a href="./update.do?seq=${bbs.noticeBbsSeq }">수정</a></span> <span class="label label-default"><a href="./delete.do?seq=${bbs.noticeBbsSeq }&page=${param.page}">삭제</a></span>
             </div>
         </div>
     </div>

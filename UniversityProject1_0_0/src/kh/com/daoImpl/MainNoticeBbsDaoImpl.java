@@ -43,5 +43,15 @@ public class MainNoticeBbsDaoImpl implements MainNoticeBbsDao {
 	@Override
 	public MainNoticeBbsDto getBbs(int noticeBbsSeq) {
 		return sqlSession.selectOne(ns+"getBbs",noticeBbsSeq);
+	}
+
+	@Override
+	public boolean deleteArticle(int seq) {
+		return sqlSession.update(ns + "deleteArticle", seq) > 0 ? true:false;
+	}
+
+	@Override
+	public boolean updateArticle(MainNoticeBbsDto bbs) {
+		return sqlSession.update(ns + "updateArticle", bbs) > 0 ? true:false;
 	}	
 }

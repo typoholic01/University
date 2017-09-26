@@ -36,4 +36,14 @@ public class MainNoticeBbsServiceImpl implements MainNoticeBbsService {
 		return dao.getBbs(seq);
 	}
 
+	@Override
+	public boolean deleteArticle(int seq) {
+		return dao.deleteArticle(seq);
+	}
+
+	@Override
+	public boolean updateArticle(MainNoticeBbsDto bbs) {
+		return dao.updateArticle(bbs);
+	}
+
 }
