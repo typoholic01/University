@@ -14,12 +14,3 @@ response.sendRedirect("./main.do");
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-

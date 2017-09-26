@@ -19,14 +19,22 @@
                                 </h4>
                             </div>
                         </div>
+                        <hr style="margin-top: 0;    margin-bottom: 0.5em;    border-top-color: #ccc;">
+                        <c:if test="${bbs.fileName != '-1' }">
+                        <div class="row" style="text-align: -webkit-auto;">
+                        	<div class="col-sm-2">
+                        		<span>첨부파일:</span>
+                        	</div>
+                        	<div class="col-sm-10">
+                        		<span><a href="${pageContext.request.contextPath }/upload/file/${bbs.fileName}" download="${bbs.orgFileName }">${bbs.orgFileName }</a></span>
+                        	</div>
+                        </div>
+                        </c:if>
                     </div>
                 </div>
             <div class="panel-body">
-                <a href="#" class="thumbnail" style="width: fit-content;height: fit-content;">
-                    <img alt="Image" src="http://i.imgur.com/tAHVmXi.jpg">
-                </a>
-                <span>${bbs.content }</span>                
-            </div>            
+                <span>${bbs.content }</span>
+            </div>
             <div class="panel-footer">
                 <span class="label label-default"><a href="./update.do?seq=${bbs.noticeBbsSeq }">수정</a></span> <span class="label label-default"><a href="./delete.do?seq=${bbs.noticeBbsSeq }&page=${param.page}">삭제</a></span>
             </div>

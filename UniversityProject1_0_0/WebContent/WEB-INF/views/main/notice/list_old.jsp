@@ -3,53 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <fmt:requestEncoding value="utf-8"/> 
 
 <h2 class="category-title">공지 게시판</h2>
-
-<!-- list-style -->
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
-
-<!-- body -->
-<div class="row">
-<div class="col-sm-11">
-<div class="table-responsive">          
-  <table class="table table-hover table-bordered">
-  	<colgroup>
-  		<col class="col-sm-1" />
-  		<col class="col-sm-7" />
-  		<col class="col-sm-2" />
-  		<col class="col-sm-2" />
-  	</colgroup>
-    <thead>
-      <tr class="active">
-        <th>번호</th>
-        <th>제목</th>
-        <th>글쓴이</th>
-        <th>날짜</th>
-      </tr>
-    </thead>
-    <tbody>
- 	<!-- 				게시물 불러오기				 -->
- 	<c:forEach items="${bbsList }" var="bbs">
-      <tr>
-        <td>${bbs.noticeBbsSeq }</td>
-        <td>
-        	<a href="./detail.do?seq=${bbs.noticeBbsSeq }&page=${pagination.currPage}">${bbs.title }</a> 
-        	<c:if test="${bbs.fileName != '-1' }"><i class="fa fa-file"></i></c:if>
-        </td>
-        <td>${bbs.userId }</td>
-        <td>${fn:substring(bbs.wDate,0,10) }</td>
-      </tr>
-   	</c:forEach>      
-    </tbody>
-  </table>
-  </div>
-</div>
-</div>
-
-<!-- 페이징 -->
+    <!-- list -->
+	<ul class="media-list">
+    	<!-- 				게시물 불러오기				 -->
+    	<c:forEach items="${bbsList }" var="bbs">
+    	<li class="media">
+            <div class="media-left">
+                <a href="#" title="Post">
+                    <img class="media-object" src="${pageContext.request.contextPath }/img/h1.jpeg" alt="Post">
+                </a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading"><a href="./detail.do?seq=${bbs.noticeBbsSeq }&page=${pagination.currPage}" title="Post Title">${bbs.title }</a></h3>
+                <p>${bbs.content }</p>
+                <aside class="meta category-meta">
+                    <div class="pull-left">
+                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 0 Comment</a></div>
+                        <div class="arc-date">${bbs.wDate }</div>
+                    </div>
+                    <div class="pull-right">
+                        <ul class="arc-share">
+                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </aside>                                
+            </div>
+        </li>
+    	</c:forEach>
+    </ul>
+    
+    <!-- 페이징 -->
     <div style="text-align: center;">
     <ul class="pagination pagination-lg">
     	<!-- 10페이지 이전 -->

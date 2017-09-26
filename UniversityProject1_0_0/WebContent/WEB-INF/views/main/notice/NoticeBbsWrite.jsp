@@ -9,11 +9,11 @@
 
 <!-- 글 생성시 -->
 <c:if test="${bbs == null }">
-<form action="./writeAf.do" method="POST">
+<form action="./writeAf.do" method="POST" enctype="multipart/form-data">
 </c:if>
 <!-- 글 삭제시 -->
 <c:if test="${bbs != null }">
-<form action="./updateAf.do" method="POST">
+<form action="./updateAf.do" method="POST" enctype="multipart/form-data">
 </c:if>
 <input type="hidden" name="noticeBbsSeq" value="${bbs.noticeBbsSeq }" />
 <div class="col-md-9">
@@ -33,9 +33,9 @@
 	</div>
 	
 	<div class="form-group"> <!-- File field -->
-	   <input type="file" name="img[]" class="file" style="visibility: hidden;position: absolute;">
+	   <input type="file" id="uploadFile" name="uploadFile" class="file" style="visibility: hidden;position: absolute;">
 	   <div class="input-group col-xs-12">
-	     <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+	     <span class="input-group-addon"><i class="fa fa-file"></i></span>
 	     <input type="text" class="form-control input-lg" disabled placeholder="파일 업로드">
 	     <span class="input-group-btn">
 	       <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> 파일</button>
@@ -48,6 +48,4 @@
 	</div>
 	
 </div>
-	
-	
 </form>

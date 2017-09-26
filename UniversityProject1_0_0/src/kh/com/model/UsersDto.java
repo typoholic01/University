@@ -28,6 +28,10 @@ public class UsersDto implements Serializable {
 		this.userAddress = userAddress;
 	}
 	
+	public UsersDto() {
+		
+	}
+
 	public String getUserId() {
 		return userId;
 	}
