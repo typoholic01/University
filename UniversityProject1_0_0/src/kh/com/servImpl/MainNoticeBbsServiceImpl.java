@@ -22,8 +22,8 @@ public class MainNoticeBbsServiceImpl implements MainNoticeBbsService {
 	}
 	
 	@Override
-	public int getTotalArticle() {
-		return dao.getTotalArticle();
+	public int getTotalBbs() {
+		return dao.getTotalBbs();
 	}
 
 	@Override
@@ -37,13 +37,13 @@ public class MainNoticeBbsServiceImpl implements MainNoticeBbsService {
 	}
 
 	@Override
-	public boolean deleteArticle(int seq) {
-		return dao.deleteArticle(seq);
+	public boolean deleteBbs(int seq) {
+		return dao.deleteBbs(seq);
 	}
 
 	@Override
-	public boolean updateArticle(MainNoticeBbsDto bbs) {
-		return dao.updateArticle(bbs);
+	public boolean updateBbs(MainNoticeBbsDto bbs) {
+		return dao.updateBbs(bbs);
 	}
 
 }

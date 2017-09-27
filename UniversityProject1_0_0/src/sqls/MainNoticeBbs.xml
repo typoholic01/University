@@ -52,14 +52,14 @@
 	</select>
 	
 	<!-- 총 게시물 수 가져오기 -->
-	<select id="getTotalArticle" resultType="Integer">
+	<select id="getTotalBbs" resultType="Integer">
 		SELECT NVL(COUNT(NOTICE_BBS_SEQ), 0)
 		FROM MAIN_NOTICE_BBS
 		WHERE STATUS = 1
 	</select>
 	
 	<!-- Update -->
-	<update id="updateArticle" parameterType="MainNoticeBbsDto">
+	<update id="updateBbs" parameterType="MainNoticeBbsDto">
 		UPDATE MAIN_NOTICE_BBS
 		SET TITLE = #{title},
 			CONTENT = #{content}
@@ -67,7 +67,7 @@
 	</update>
 	
 	<!-- 						DELETE 						-->
-	<update id="deleteArticle" parameterType="Integer">
+	<update id="deleteBbs" parameterType="Integer">
 		UPDATE MAIN_NOTICE_BBS
 		SET STATUS = 0
 		WHERE NOTICE_BBS_SEQ = #{seq}

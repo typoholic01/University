@@ -11,12 +11,12 @@ public interface MainNoticeBbsDao {
 
 	boolean insertBbs(MainNoticeBbsDto dto);
 
-	int getTotalArticle();
+	int getTotalBbs();
 
 	MainNoticeBbsDto getBbs(int seq);
 
-	boolean deleteArticle(int seq);
+	boolean deleteBbs(int seq);
 
-	boolean updateArticle(MainNoticeBbsDto bbs);
+	boolean updateBbs(MainNoticeBbsDto bbs);
 
 }

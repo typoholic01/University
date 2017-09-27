@@ -4,18 +4,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>
-<script type="text/javascript" src='${pageContext.request.contextPath }/js/NoticeBbsWrite.js' ></script>
-<link rel="stylesheet" href='${pageContext.request.contextPath }/css/NoticeBbsWrite.css' />
 
-<!-- 글 생성시 -->
-<c:if test="${bbs == null }">
-<form action="./writeAf.do" method="POST" enctype="multipart/form-data">
-</c:if>
-<!-- 글 삭제시 -->
-<c:if test="${bbs != null }">
-<form action="./updateAf.do" method="POST" enctype="multipart/form-data">
-</c:if>
-<input type="hidden" name="noticeBbsSeq" value="${bbs.noticeBbsSeq }" />
 <div class="col-md-9">
 	<div class="form-group"> <!-- userId field -->
 		<label class="control-label " for="userId">아이디</label>
@@ -48,4 +37,3 @@
 	</div>
 	
 </div>
-</form>

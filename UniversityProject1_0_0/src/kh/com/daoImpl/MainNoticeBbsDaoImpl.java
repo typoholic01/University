@@ -22,8 +22,6 @@ public class MainNoticeBbsDaoImpl implements MainNoticeBbsDao {
 
 	@Override
 	public List<MainNoticeBbsDto> getBbsList(Pagination pagination) {
-		logger.info("getBbsList");
-		logger.info(pagination.toString());
 		
 		return sqlSession.selectList(ns+"getBbsList",pagination);
 	}
@@ -36,8 +34,8 @@ public class MainNoticeBbsDaoImpl implements MainNoticeBbsDao {
 	}
 
 	@Override
-	public int getTotalArticle() {
-		return sqlSession.selectOne(ns+"getTotalArticle");
+	public int getTotalBbs() {
+		return sqlSession.selectOne(ns+"getTotalBbs");
 	}
 
 	@Override
@@ -46,12 +44,12 @@ public class MainNoticeBbsDaoImpl implements MainNoticeBbsDao {
 	}
 
 	@Override
-	public boolean deleteArticle(int seq) {
-		return sqlSession.update(ns + "deleteArticle", seq) > 0 ? true:false;
+	public boolean deleteBbs(int seq) {
+		return sqlSession.update(ns + "deleteBbs", seq) > 0 ? true:false;
 	}
 
 	@Override
-	public boolean updateArticle(MainNoticeBbsDto bbs) {
-		return sqlSession.update(ns + "updateArticle", bbs) > 0 ? true:false;
+	public boolean updateBbs(MainNoticeBbsDto bbs) {
+		return sqlSession.update(ns + "updateBbs", bbs) > 0 ? true:false;
 	}	
 }

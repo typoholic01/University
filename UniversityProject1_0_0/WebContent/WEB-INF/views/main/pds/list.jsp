@@ -9,6 +9,7 @@
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 
+<h2 class="category-title">자유 게시판</h2>
 <!-- body -->
 <div class="row">
 <div class="col-sm-11">
@@ -32,13 +33,13 @@
  	<!-- 				게시물 불러오기				 -->
  	<c:forEach items="${bbsList }" var="bbs">
       <tr>
-        <td>${bbs.bbsSeq }</td>
+        <td>${bbs.pdsSeq }</td>
         <td>
-        	<a href="./detail.do?seq=${bbs.bbsSeq }&page=${pagination.currPage}">${bbs.bbsTitle }</a> 
-        	<c:if test="${bbs.bbsStoredFileName != '-1' }"><i class="fa fa-file"></i></c:if>
+        	<a href="./detail.do?seq=${bbs.pdsSeq }&page=${pagination.currPage}">${bbs.title }</a> 
+        	<c:if test="${bbs.fileName != '-1' }"><i class="fa fa-file"></i></c:if>
         </td>
         <td>${bbs.userId }</td>
-        <td>${fn:substring(bbs.bbsWdate,0,10) }</td>
+        <td>${fn:substring(bbs.wDate,0,10) }</td>
       </tr>
    	</c:forEach>      
     </tbody>

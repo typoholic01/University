@@ -3,9 +3,7 @@ package kh.com.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.model.MainNoticeBbsDto;
-import kh.com.model.UsersDto;
 import kh.com.serv.MainNoticeBbsService;
 import kh.com.util.Pagination;
 
@@ -178,7 +175,7 @@ public class MainNoticeController {
 		if (pageStr == null) 	page = 1;
 		else 					page = Integer.parseInt(pageStr);		
 		
-		totalArticle = serv.getTotalArticle();
+		totalArticle = serv.getTotalBbs();
 		return new Pagination(totalArticle, page);
 		
 	}
@@ -199,7 +196,7 @@ public class MainNoticeController {
 		
 		model.addAttribute("bbs", bbs);
 		
-		return "mainNoticeWrite.tiles";
+		return "mainNoticeUpdate.tiles";
 	}
 	
 	//글 수정하기
@@ -209,7 +206,7 @@ public class MainNoticeController {
 		
 		logger.info(bbs.toString());
 		
-		serv.updateArticle(bbs);
+		serv.updateBbs(bbs);
 		
 		return  "redirect:/notice/list.do";
 	}
@@ -233,7 +230,7 @@ public class MainNoticeController {
 		page = req.getParameter("page");
 		
 		//삭제
-		serv.deleteArticle(seq);
+		serv.deleteBbs(seq);
 		
 		//리다이렉트 전달값
 		redirectAttributes.addAttribute("page", page);

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="MainPdsCommentDao">
+
+	<!-- 						CREATE 						-->
+	<!-- 게시물 입력 -->
+	<insert id="insertBbs" parameterType="MainPdsDto" useGeneratedKeys="false">
+		INSERT INTO MAIN_PDS(
+			REF, PDS_SEQ, USER_ID, TITLE, CONTENT, FILENAME, ORG_FILENAME
+		)
+		VALUES(
+			PDS_SEQ.NEXTVAL, PDS_SEQ.NEXTVAL, #{userId}, #{title}, #{content}, #{fileName}, #{orgFileName}
+		)
+	</insert>
+
+	<!-- 						READ 						-->
+	<!-- 게시물들 가져오기 -->
+	<select id="getBbsList" resultType="MainPdsDto" parameterType="Query">
+		SELECT 
+			PDS_SEQ as pdsSeq,
+			COMMENT_GROUP_NO as commentGroupNo, 
+			COMMENT_SHAPE as commentShape, 
+			COMMENT_SEQ as commentSeq, 
+			STATUS, 
+			USER_ID as userId, 
+			CONTENT, 
+			CREATE_AT as createAt
+		FROM (
+				SELECT PDS_SEQ, COMMENT_GROUP_NO, COMMENT_SHAPE, COMMENT_SEQ, STATUS, USER_ID, CONTENT, CREATE_AT,
+				ROW_NUMBER() OVER (ORDER BY COMMENT_GROUP_NO DESC, COMMENT_SHAPE ASC) R
+				FROM MAIN_PDS_COMMENT
+				WHERE PDS_SEQ = #{seq}
+				AND STATUS = 1
+		)
+		WHERE R BETWEEN #{startArticle} and #{endArticle}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="getBbs" resultType="MainPdsDto" parameterType="Integer">
+		SELECT 
+			REF, 
+			reply_shape as replyShape, 
+			PDS_SEQ as pdsSeq, 
+			USER_ID as userId, 
+			TITLE, 
+			CONTENT, 
+			READCOUNT, 
+			FILENAME, 
+			ORG_FILENAME as orgFileName, 
+			STATUS, 
+			WDATE
+		FROM MAIN_PDS
+		WHERE PDS_SEQ = #{seq}
+	</select>
+	
+	<!-- 총 게시물 수 가져오기 -->
+	<select id="getTotalBbs" resultType="Integer">
+		SELECT NVL(COUNT(PDS_SEQ), 0)
+		FROM MAIN_PDS
+		WHERE STATUS = 1
+	</select>
+	
+	<!-- Update -->
+	<update id="updateBbs" parameterType="MainPdsDto">
+		UPDATE MAIN_PDS
+		SET TITLE = #{title},
+			CONTENT = #{content}
+		WHERE PDS_SEQ = #{pdsSeq}
+	</update>
+	
+	<!-- 						DELETE 						-->
+	<update id="deleteBbs" parameterType="Integer">
+		UPDATE MAIN_PDS
+		SET STATUS = 0
+		WHERE PDS_SEQ = #{seq}
+	</update>
+</mapper>

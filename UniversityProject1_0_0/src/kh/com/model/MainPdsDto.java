@@ -8,41 +8,34 @@ import org.apache.ibatis.type.Alias;
 public class MainPdsDto implements Serializable {
 	private static final long serialVersionUID = -7643888834953524245L;
 	
-	private int pdsSeq;
 	private int ref;
-	private int step;
-	private int depth;
+	private String replyShape;
+	private String pdsSeq;
 	private String userId;
 	private String title;
 	private String content;
 	private int readCount;
 	private String fileName;
-	private String orgFileName; 
+	private String orgFileName;
 	private int status;
 	private String wDate;
-	public int getPdsSeq() {
-		return pdsSeq;
-	}
-	public void setPdsSeq(int pdsSeq) {
-		this.pdsSeq = pdsSeq;
-	}
 	public int getRef() {
 		return ref;
 	}
 	public void setRef(int ref) {
 		this.ref = ref;
 	}
-	public int getStep() {
-		return step;
+	public String getReplyShape() {
+		return replyShape;
 	}
-	public void setStep(int step) {
-		this.step = step;
+	public void setReplyShape(String replyShape) {
+		this.replyShape = replyShape;
 	}
-	public int getDepth() {
-		return depth;
+	public String getPdsSeq() {
+		return pdsSeq;
 	}
-	public void setDepth(int depth) {
-		this.depth = depth;
+	public void setPdsSeq(String pdsSeq) {
+		this.pdsSeq = pdsSeq;
 	}
 	public String getUserId() {
 		return userId;
@@ -92,13 +85,12 @@ public class MainPdsDto implements Serializable {
 	public void setwDate(String wDate) {
 		this.wDate = wDate;
 	}
+	
 	@Override
 	public String toString() {
-		return "MainPds [pdsSeq=" + pdsSeq + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", userId="
-				+ userId + ", title=" + title + ", content=" + content + ", readCount=" + readCount + ", fileName="
-				+ fileName + ", orgFileName=" + orgFileName + ", status=" + status + ", wDate=" + wDate + "]";
+		return "MainPdsDto [ref=" + ref + ", replyShape=" + replyShape + ", pdsSeq=" + pdsSeq + ", userId=" + userId
+				+ ", title=" + title + ", content=" + content + ", readCount=" + readCount + ", fileName=" + fileName
+				+ ", orgFileName=" + orgFileName + ", status=" + status + ", wDate=" + wDate + "]";
 	}
-	
-	
 
 }

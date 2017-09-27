@@ -13,13 +13,13 @@ public interface MainNoticeBbsService {
 	/*					READ					*/
 	MainNoticeBbsDto getBbs(int seq);
 	List<MainNoticeBbsDto> getBbsList(Pagination pagination);
-	int getTotalArticle();
+	int getTotalBbs();
 	
 	/*					UPDATE					*/
-	boolean updateArticle(MainNoticeBbsDto bbs);
+	boolean updateBbs(MainNoticeBbsDto bbs);
 
 	/*					DELETE					*/
-	boolean deleteArticle(int seq);
+	boolean deleteBbs(int seq);
 
 
 }

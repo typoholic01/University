@@ -10,7 +10,6 @@
 
 <section class="category-content col-sm-9">
 
-<h2 class="category-title">공지 게시판</h2>
     
     <%@ include file="list.jsp" %>
     

@@ -4,8 +4,8 @@ public class Pagination {
 
 	private int totalArticle;					//총 게시물
 	private int currPage;						//현재 페이지
-	private int startArticle;					//시작 게시물
-	private int endArticle;						//끝 게시물
+	private int startBbs;					//시작 게시물
+	private int endBbs;						//끝 게시물
 	private int startPage;						//리스트 시작 번호
 	private int endPage;						//리스트 종료 번호
 	private int finalEndPage;					//최종 페이지 번호
@@ -20,11 +20,11 @@ public class Pagination {
 		this.currPage = currPage;
 		
 		//시작 게시물 지정
-		startArticle = articleLimit*(currPage - 1) + 1;
-		if (startArticle == 0) startArticle = 1; 
+		startBbs = articleLimit*(currPage - 1) + 1;
+		if (startBbs == 0) startBbs = 1; 
 		
 		//끝 게시물 지정
-		endArticle = articleLimit*currPage<=totalArticle?articleLimit*currPage:totalArticle;		
+		endBbs = articleLimit*currPage<=totalArticle?articleLimit*currPage:totalArticle;		
 		
 		//시작 페이지 지정
 		startPage = currPage-(currPage-1)%pageLimit;
@@ -62,20 +62,20 @@ public class Pagination {
 		this.currPage = currPage;
 	}
 
-	public int getStartArticle() {
-		return startArticle;
+	public int getStartBbs() {
+		return startBbs;
 	}
 
-	public void setStartArticle(int startArticle) {
-		this.startArticle = startArticle;
+	public void setStartBbs(int startBbs) {
+		this.startBbs = startBbs;
 	}
 
-	public int getEndArticle() {
-		return endArticle;
+	public int getEndBbs() {
+		return endBbs;
 	}
 
-	public void setEndArticle(int endArticle) {
-		this.endArticle = endArticle;
+	public void setEndBbs(int endBbs) {
+		this.endBbs = endBbs;
 	}
 
 	public int getStartPage() {
@@ -110,8 +110,8 @@ public class Pagination {
 
 	@Override
 	public String toString() {
-		return "Pagination [totalArticle=" + totalArticle + ", currPage=" + currPage + ", startArticle=" + startArticle
-				+ ", endArticle=" + endArticle + ", startPage=" + startPage + ", endPage=" + endPage + ", finalEndPage="
+		return "Pagination [totalArticle=" + totalArticle + ", currPage=" + currPage + ", startArticle=" + startBbs
+				+ ", endArticle=" + endBbs + ", startPage=" + startPage + ", endPage=" + endPage + ", finalEndPage="
 				+ finalEndPage + ", articleLimit=" + articleLimit + ", pageLimit=" + pageLimit + "]";
 	}
 	
