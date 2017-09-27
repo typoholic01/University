@@ -13,12 +13,12 @@
 	
 	<div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="title" name="title" type="text" value="${bbs.title }"/>
+		<input class="form-control" id="bbsTitle" name="bbsTitle" type="text" value="${bbs.bbsTitle }"/>
 	</div>
 	
 	<div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
-		<textarea class="form-control" cols="40" id="content" name="content" rows="10">${bbs.content }</textarea>
+		<textarea class="form-control" cols="40" id="bbsContent" name="bbsContent" rows="10">${bbs.bbsContent }</textarea>
 	</div>
 	
 	<div class="form-group"> <!-- File field -->

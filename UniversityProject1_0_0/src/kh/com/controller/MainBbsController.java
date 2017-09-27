@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.model.MainBbs;
 import kh.com.model.MainNoticeBbsDto;
@@ -25,6 +26,7 @@ import kh.com.util.Pagination;
 @Controller
 public class MainBbsController {
 	private static final Logger logger = LoggerFactory.getLogger(MainBbsController.class);
+	private static final String boardName = "대문공지";
 	
 	@Autowired
 	MainBbsService serv;
@@ -48,7 +50,7 @@ public class MainBbsController {
 		logger.info("Post: /bbs/writeAf.do");
 		//init
 		String path = "";
-        String boardName,userId,bbsTitle,bbsContent,bbsStoredFileName,bbsOrgFileName;
+        String userId,bbsTitle,bbsContent,bbsStoredFileName,bbsOrgFileName;
         
         //init
         path = req.getSession().getServletContext().getRealPath("/") + "upload/file/"; //파일 저장경로
@@ -56,7 +58,6 @@ public class MainBbsController {
         MainBbs bbs = new MainBbs();
         
         //listen
-        boardName = "대문공지";
 		userId = req.getParameter("userId");
 		bbsTitle = req.getParameter("title");
 		bbsContent = req.getParameter("content");
@@ -91,11 +92,11 @@ public class MainBbsController {
 		Pagination pagination;
 		
 		//페이징
-		pagination = new Pagination(getTotalBbs("대문공지"), getCurrPage(req));
+		pagination = new Pagination(getTotalBbs(boardName), getCurrPage(req));
 
 		//질의 설정
 		query = new Query();
-		query.setBoardName("대문공지");
+		query.setBoardName(boardName);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
 		
@@ -121,13 +122,13 @@ public class MainBbsController {
 		int seq;
 
 		//페이징
-		pagination = new Pagination(getTotalBbs("대문공지"), getCurrPage(req));
+		pagination = new Pagination(getTotalBbs(boardName), getCurrPage(req));
 		
 		//질의 설정
 		seq = Integer.parseInt(req.getParameter("seq"));
 		
 		query = new Query();
-		query.setBoardName("대문공지");
+		query.setBoardName(boardName);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
 		
@@ -143,6 +144,63 @@ public class MainBbsController {
 		return "mainNoticeDetail.tiles";
 	}
 	
+	/*************************************************
+	 * 					UPDATE
+	 * ***********************************************/
+	//글 수정하기
+	@RequestMapping(value="/bbs/update.do",method=RequestMethod.GET)
+	public String updateArticle(HttpServletRequest req, Model model) {
+		logger.info("bbs/update");
+		//init
+		MainBbs bbs;
+		
+		//DB get
+		bbs = serv.getBbs(getSeq(req));
+		
+		//요소 추가
+		model.addAttribute("bbs", bbs);
+		
+		return "mainNoticeUpdate.tiles";
+	}
+	
+	//글 수정하기
+	@RequestMapping(value="/bbs/updateAf.do",method=RequestMethod.POST)
+	public String updateAfArticle(MainBbs bbs, Model model) {
+		logger.info("updateAfArticle");
+		
+		//query Set
+		bbs.setBoardName(boardName);
+		
+		//DB set
+		try {
+			serv.updateBbs(bbs);
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return  "redirect:/bbs/list.do";
+	}
+	
+	
+	/*************************************************
+	 * 					DELETE
+	 * ***********************************************/
+	//글 삭제하기
+	@RequestMapping(value="/bbs/delete.do",method=RequestMethod.GET)
+	public String deleteArticle(HttpServletRequest req, RedirectAttributes redirectAttributes) {
+		logger.info("/bbs/delete");
+		
+		//삭제
+		serv.deleteBbs(getSeq(req));
+		
+		//리다이렉트 전달값
+		redirectAttributes.addAttribute("page", req.getParameter("page"));
+		
+		return "redirect:/bbs/list.do";
+		
+	}
+	
 	/************************************************************
 	 * 							Util Method 
 	 * **********************************************************/
@@ -156,6 +214,18 @@ public class MainBbsController {
 		}
 		
 		return currPage;
+	}
+	
+	private int getSeq(HttpServletRequest req) {
+		int seq;
+		
+		if (req.getParameter("seq") == null) {
+			seq = 0;
+		} else {
+			seq = Integer.parseInt(req.getParameter("seq"));
+		}
+		
+		return seq;
 	}
 
 	private int getTotalBbs(String boardName) {
