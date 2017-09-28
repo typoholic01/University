@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.dao.MainBbsDao;
 import kh.com.model.MainBbs;
-import kh.com.model.Query;
+import kh.com.model.QueryBbs;
 
 @Repository
 public class MainBbsDaoImpl implements MainBbsDao {
@@ -21,7 +21,7 @@ public class MainBbsDaoImpl implements MainBbsDao {
 	SqlSession sqlSession;
 
 	@Override
-	public List<MainBbs> getBbsList(Query query) {
+	public List<MainBbs> getBbsList(QueryBbs query) {
 		logger.info("getBbsList");
 		
 		return sqlSession.selectList(ns+"getBbsList",query);

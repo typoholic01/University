@@ -3,7 +3,7 @@ package kh.com.serv;
 import java.util.List;
 
 import kh.com.model.MainBbs;
-import kh.com.model.Query;
+import kh.com.model.QueryBbs;
 
 public interface MainBbsService {
 	
@@ -12,7 +12,7 @@ public interface MainBbsService {
 	
 	/*					READ					*/
 	MainBbs getBbs(int seq);
-	List<MainBbs> getBbsList(Query query);
+	List<MainBbs> getBbsList(QueryBbs query);
 	int getTotalBbs(String boardName);
 	
 	/*					UPDATE					*/

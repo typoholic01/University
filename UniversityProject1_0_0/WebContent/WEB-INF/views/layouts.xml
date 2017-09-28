@@ -23,53 +23,53 @@
 	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
-<!-- 		대문 공지 게시판 		-->
+<!-- 		공지 게시판 		-->
 <!-- 	리스트	 -->
-<definition name="mainNotice.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/NoticeBbsList.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+<definition name="mainBbsList.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsList.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	글쓰기	 -->
-<definition name="mainNoticeWrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/bbsWrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+<definition name="mainBbsWrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsWrite.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 글수정  -->
-<definition name="mainNoticeUpdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/bbsUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+<definition name="mainBbsUpdate.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsUpdate.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	디테일	 -->
-<definition name="mainNoticeDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/notice/NoticeBbsDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+<definition name="mainBbsDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsDetail.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
 </definition>
 
-<!-- 		대문 자유 게시판 		-->
+<!-- 		자료 게시판 		-->
 <!-- 	리스트	 -->
 <definition name="mainPdsList.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/pdsList.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	글쓰기	 -->
 <definition name="mainPdsWrite.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/bbsWrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	글수정	 -->
 <definition name="mainPdsUpdate.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/bbsUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	디테일	 -->
 <definition name="mainPdsDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/pdsDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/pds/bbsDetail.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	댓글	 -->
 <definition name="mainPdsComment.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/comment.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/MainRightMenu.jsp"/>	
+	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/pds/comment.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
 </definition>
 
 </tiles-definitions>

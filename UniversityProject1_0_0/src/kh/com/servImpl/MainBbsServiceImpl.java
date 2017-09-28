@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.com.dao.MainBbsDao;
 import kh.com.model.MainBbs;
-import kh.com.model.Query;
+import kh.com.model.QueryBbs;
 import kh.com.serv.MainBbsService;
 
 @Service
@@ -27,7 +27,7 @@ public class MainBbsServiceImpl implements MainBbsService {
 	}
 
 	@Override
-	public List<MainBbs> getBbsList(Query query) {
+	public List<MainBbs> getBbsList(QueryBbs query) {
 		return dao.getBbsList(query);
 	}
 

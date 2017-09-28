@@ -40,5 +40,5 @@
             </div>
         </div>
     </div>
-    <%@ include file="list.jsp" %>
+    <%@ include file="./parts/bbsListView.jsp" %>
 </section>

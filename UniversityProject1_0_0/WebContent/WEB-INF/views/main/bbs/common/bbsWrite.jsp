@@ -7,8 +7,8 @@
 <script type="text/javascript" src='${pageContext.request.contextPath }/js/NoticeBbsWrite.js' ></script>
 <link rel="stylesheet" href='${pageContext.request.contextPath }/css/NoticeBbsWrite.css' />
 
-<!-- 글 수정시 -->
-<form action="./updateAf.do" method="POST" enctype="multipart/form-data">
+<!-- 글 생성시 -->
+<form action="./writeAf.do" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="bbsSeq" value="${bbs.bbsSeq }" />
-    <%@ include file="../bbsWrite.jsp" %>
+    <%@ include file="./parts/bbsWriteView.jsp" %>
 </form>

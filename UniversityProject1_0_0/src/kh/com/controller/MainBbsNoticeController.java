@@ -17,16 +17,16 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.model.MainBbs;
-import kh.com.model.MainNoticeBbsDto;
-import kh.com.model.Query;
+import kh.com.model.QueryBbs;
 import kh.com.serv.MainBbsService;
 import kh.com.util.FileUpload;
 import kh.com.util.Pagination;
 
 @Controller
-public class MainBbsController {
-	private static final Logger logger = LoggerFactory.getLogger(MainBbsController.class);
-	private static final String boardName = "대문공지";
+public class MainBbsNoticeController {
+	private static final Logger logger = LoggerFactory.getLogger(MainBbsNoticeController.class);
+	public static final String boardName = "공지 게시판";
+	private static final String prefixAddress = "/notice/";
 	
 	@Autowired
 	MainBbsService serv;
@@ -35,22 +35,27 @@ public class MainBbsController {
 	 * 					CREATE
 	 * ***********************************************/
 	//글쓰기 화면
-	@RequestMapping(value="/bbs/write.do",method=RequestMethod.GET)
+	@RequestMapping(value= {prefixAddress+"write.do"},method=RequestMethod.GET)
 	public String write(Model model) {
-		logger.info("/bbs/write.do");
+		logger.info("/notice/write.do");
 		
 		
 		
-		return "mainNoticeWrite.tiles";
+		return "mainBbsWrite.tiles";
 	}
 	
 	//글쓰기 기능
-	@RequestMapping(value="/bbs/writeAf.do",method=RequestMethod.POST)
+	@RequestMapping(value=prefixAddress+"writeAf.do",method=RequestMethod.POST)
 	public String writePost(MultipartHttpServletRequest req, MultipartFile uploadFile, Model model) throws IOException {
-		logger.info("Post: /bbs/writeAf.do");
+		logger.info("Post: /notice/writeAf.do");
 		//init
 		String path = "";
-        String userId,bbsTitle,bbsContent,bbsStoredFileName,bbsOrgFileName;
+        String userId; 
+        String bbsContent;
+        String bbsStoredFileName;
+        String bbsOrgFileName;
+        String bbsTitle;
+        
         
         //init
         path = req.getSession().getServletContext().getRealPath("/") + "upload/file/"; //파일 저장경로
@@ -59,8 +64,8 @@ public class MainBbsController {
         
         //listen
 		userId = req.getParameter("userId");
-		bbsTitle = req.getParameter("title");
-		bbsContent = req.getParameter("content");
+		bbsTitle = req.getParameter("bbsTitle");
+		bbsContent = req.getParameter("bbsContent");
 		bbsStoredFileName = fileUpload.getStoredFileName();
 		bbsOrgFileName = fileUpload.getOrgFileName();
 		
@@ -74,7 +79,7 @@ public class MainBbsController {
         
 		serv.insertBbs(bbs);		
 		
-		return "redirect:/notice/list.do";
+		return "redirect:"+prefixAddress+"list.do";
 	}
 	
 	
@@ -82,20 +87,20 @@ public class MainBbsController {
 	 * 					READ
 	 * ***********************************************/
 	//리스트 화면
-	@RequestMapping(value="/bbs/list.do",method=RequestMethod.GET)
+	@RequestMapping(value=prefixAddress+"list.do",method=RequestMethod.GET)
 	public String list(HttpServletRequest req, Model model) {
 		logger.info("/bbs/list.do");
 		
 		//init
 		List<MainBbs> bbsList;
-		Query query;
+		QueryBbs query;
 		Pagination pagination;
 		
 		//페이징
 		pagination = new Pagination(getTotalBbs(boardName), getCurrPage(req));
 
 		//질의 설정
-		query = new Query();
+		query = new QueryBbs();
 		query.setBoardName(boardName);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
@@ -106,19 +111,20 @@ public class MainBbsController {
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("pagination", pagination);
+		model.addAttribute("boardName", boardName);
 		
-		return "mainNotice.tiles";
+		return "mainBbsList.tiles";
 	}
 
 	//디테일 화면
-	@RequestMapping(value="/bbs/detail.do",method=RequestMethod.GET)
+	@RequestMapping(value=prefixAddress+"detail.do",method=RequestMethod.GET)
 	public String detail(HttpServletRequest req, Model model) {
 		logger.info("/bbs/detail.do");
 		//init
 		Pagination pagination;
 		List<MainBbs> bbsList;
 		MainBbs bbs;
-		Query query;
+		QueryBbs query;
 		int seq;
 
 		//페이징
@@ -127,7 +133,7 @@ public class MainBbsController {
 		//질의 설정
 		seq = Integer.parseInt(req.getParameter("seq"));
 		
-		query = new Query();
+		query = new QueryBbs();
 		query.setBoardName(boardName);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
@@ -139,16 +145,18 @@ public class MainBbsController {
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("pagination", pagination);
+		model.addAttribute("boardName", boardName);
 		model.addAttribute("bbs", bbs);
 		
-		return "mainNoticeDetail.tiles";
+		
+		return "mainBbsDetail.tiles";
 	}
 	
 	/*************************************************
 	 * 					UPDATE
 	 * ***********************************************/
 	//글 수정하기
-	@RequestMapping(value="/bbs/update.do",method=RequestMethod.GET)
+	@RequestMapping(value=prefixAddress+"update.do",method=RequestMethod.GET)
 	public String updateArticle(HttpServletRequest req, Model model) {
 		logger.info("bbs/update");
 		//init
@@ -160,11 +168,11 @@ public class MainBbsController {
 		//요소 추가
 		model.addAttribute("bbs", bbs);
 		
-		return "mainNoticeUpdate.tiles";
+		return "mainBbsUpdate.tiles";
 	}
 	
 	//글 수정하기
-	@RequestMapping(value="/bbs/updateAf.do",method=RequestMethod.POST)
+	@RequestMapping(value=prefixAddress+"updateAf.do",method=RequestMethod.POST)
 	public String updateAfArticle(MainBbs bbs, Model model) {
 		logger.info("updateAfArticle");
 		
@@ -179,7 +187,7 @@ public class MainBbsController {
 			logger.error(e.getMessage());
 		}
 		
-		return  "redirect:/bbs/list.do";
+		return  "redirect:"+prefixAddress+"list.do";
 	}
 	
 	
@@ -187,7 +195,7 @@ public class MainBbsController {
 	 * 					DELETE
 	 * ***********************************************/
 	//글 삭제하기
-	@RequestMapping(value="/bbs/delete.do",method=RequestMethod.GET)
+	@RequestMapping(value=prefixAddress+"delete.do",method=RequestMethod.GET)
 	public String deleteArticle(HttpServletRequest req, RedirectAttributes redirectAttributes) {
 		logger.info("/bbs/delete");
 		
@@ -197,7 +205,7 @@ public class MainBbsController {
 		//리다이렉트 전달값
 		redirectAttributes.addAttribute("page", req.getParameter("page"));
 		
-		return "redirect:/bbs/list.do";
+		return "redirect:"+prefixAddress+"list.do";
 		
 	}
 	

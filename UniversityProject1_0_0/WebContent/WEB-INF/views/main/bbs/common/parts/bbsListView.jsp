@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 
 <!-- body -->
+<h2 class="category-title">${boardName }</h2>
+
 <div class="row">
 <div class="col-sm-11">
 <div class="table-responsive">          

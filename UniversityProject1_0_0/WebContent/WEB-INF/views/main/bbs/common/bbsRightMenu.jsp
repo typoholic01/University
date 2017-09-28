@@ -11,7 +11,7 @@
 		<h4>게시판 목록</h4>
 		<ul>
 			<li class="current"><a href="../notice/list.do" title="">공지게시판</a></li>
-			<li><a href="#" title="">자유게시판</a></li>
+			<li><a href="../pds/list.do" title="">자유게시판</a></li>
 		</ul>
 	</div>
 </aside>

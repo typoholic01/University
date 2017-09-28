@@ -35,13 +35,16 @@
 </div>   
 <div class="row">   
 	<div class="col-md-12">
-		<form>
+		<form action="../comment/writeAf.do" method="POST">
+		<input type="hidden" name="boardAddress" value="${boardName }">
+		<input type="hidden" name="userId" value="asdf" />
+		<input type="hidden" name="bbsSeq" value="${bbs.bbsSeq}" />
 		<div class="panel panel-default">
 				<div class="panel-heading">
 					<strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
 				</div>
 				<div class="panel-body" style="padding: inherit;">
-				<textarea style="width: -webkit-fill-available;border: 0px;height: 10em;" placeholder="글쓴이는 댓글이 필요해요!" ></textarea>				
+				<textarea name="commentContent" style="width: -webkit-fill-available;border: 0px;height: 10em;" placeholder="글쓴이는 댓글이 필요해요!" ></textarea>				
 				</div>
 				<div class="panel-footer" style="text-align: -webkit-right;">				
 					<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>

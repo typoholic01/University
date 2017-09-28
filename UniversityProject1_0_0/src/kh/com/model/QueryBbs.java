@@ -2,7 +2,7 @@ package kh.com.model;
 
 import java.io.Serializable;
 
-public class Query implements Serializable {
+public class QueryBbs implements Serializable {
 	private static final long serialVersionUID = -2619339902153486228L;
 	
 	private String boardName;					//게시판 제목

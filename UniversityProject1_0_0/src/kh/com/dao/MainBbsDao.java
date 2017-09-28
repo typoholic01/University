@@ -3,7 +3,7 @@ package kh.com.dao;
 import java.util.List;
 
 import kh.com.model.MainBbs;
-import kh.com.model.Query;
+import kh.com.model.QueryBbs;
 
 public interface MainBbsDao {
 	
@@ -12,7 +12,7 @@ public interface MainBbsDao {
 	
 	/*					READ					*/
 	MainBbs getBbs(int seq);
-	List<MainBbs> getBbsList(Query query);
+	List<MainBbs> getBbsList(QueryBbs query);
 	int getTotalBbs(String boardName);
 	
 	/*					UPDATE					*/
