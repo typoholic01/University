@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,10 +24,8 @@ import kh.com.util.FileUpload;
 import kh.com.util.Pagination;
 
 @Controller
-public class MainBbsNoticeController {
-	private static final Logger logger = LoggerFactory.getLogger(MainBbsNoticeController.class);
-	public static final String boardName = "공지 게시판";
-	private static final String prefixAddress = "/notice/";
+public class BbsController {
+	private static final Logger logger = LoggerFactory.getLogger(BbsController.class);
 	
 	@Autowired
 	MainBbsService serv;
@@ -35,9 +34,9 @@ public class MainBbsNoticeController {
 	 * 					CREATE
 	 * ***********************************************/
 	//글쓰기 화면
-	@RequestMapping(value= {prefixAddress+"write.do"},method=RequestMethod.GET)
-	public String write(Model model) {
-		logger.info("/notice/write.do");
+	@RequestMapping(value= "/{boardUrl}/write.do",method=RequestMethod.GET)
+	public String write(@PathVariable String boardUrl, Model model) {
+		logger.info("/{}/write.do",boardUrl);
 		
 		
 		
@@ -45,9 +44,9 @@ public class MainBbsNoticeController {
 	}
 	
 	//글쓰기 기능
-	@RequestMapping(value=prefixAddress+"writeAf.do",method=RequestMethod.POST)
-	public String writePost(MultipartHttpServletRequest req, MultipartFile uploadFile, Model model) throws IOException {
-		logger.info("Post: /notice/writeAf.do");
+	@RequestMapping(value="/{boardUrl}/writeAf.do",method=RequestMethod.POST)
+	public String writePost(@PathVariable String boardUrl, MultipartHttpServletRequest req, MultipartFile uploadFile, Model model) throws IOException {
+		logger.info("Post: /{}/writeAf.do",boardUrl);
 		//init
 		String path = "";
         String userId; 
@@ -70,7 +69,7 @@ public class MainBbsNoticeController {
 		bbsOrgFileName = fileUpload.getOrgFileName();
 		
 		//setup
-        bbs.setBoardName(boardName);
+        bbs.setBoardUrl(boardUrl);
         bbs.setUserId(userId);
         bbs.setBbsTitle(bbsTitle);
         bbs.setBbsContent(bbsContent);
@@ -79,7 +78,9 @@ public class MainBbsNoticeController {
         
 		serv.insertBbs(bbs);		
 		
-		return "redirect:"+prefixAddress+"list.do";
+		logger.info("insert Done");
+		
+		return "redirect:/"+boardUrl+"/list.do";
 	}
 	
 	
@@ -87,8 +88,8 @@ public class MainBbsNoticeController {
 	 * 					READ
 	 * ***********************************************/
 	//리스트 화면
-	@RequestMapping(value=prefixAddress+"list.do",method=RequestMethod.GET)
-	public String list(HttpServletRequest req, Model model) {
+	@RequestMapping(value="/{boardUrl}/list.do",method=RequestMethod.GET)
+	public String list(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
 		logger.info("/bbs/list.do");
 		
 		//init
@@ -97,11 +98,11 @@ public class MainBbsNoticeController {
 		Pagination pagination;
 		
 		//페이징
-		pagination = new Pagination(getTotalBbs(boardName), getCurrPage(req));
+		pagination = new Pagination(getTotalBbs(boardUrl), getCurrPage(req));
 
 		//질의 설정
 		query = new QueryBbs();
-		query.setBoardName(boardName);
+		query.setBoardUrl(boardUrl);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
 		
@@ -111,14 +112,14 @@ public class MainBbsNoticeController {
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("pagination", pagination);
-		model.addAttribute("boardName", boardName);
+		model.addAttribute("boardUrl", boardUrl);
 		
 		return "mainBbsList.tiles";
 	}
 
 	//디테일 화면
-	@RequestMapping(value=prefixAddress+"detail.do",method=RequestMethod.GET)
-	public String detail(HttpServletRequest req, Model model) {
+	@RequestMapping(value="/{boardUrl}/detail.do",method=RequestMethod.GET)
+	public String detail(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
 		logger.info("/bbs/detail.do");
 		//init
 		Pagination pagination;
@@ -128,13 +129,13 @@ public class MainBbsNoticeController {
 		int seq;
 
 		//페이징
-		pagination = new Pagination(getTotalBbs(boardName), getCurrPage(req));
+		pagination = new Pagination(getTotalBbs(boardUrl), getCurrPage(req));
 		
 		//질의 설정
 		seq = Integer.parseInt(req.getParameter("seq"));
 		
 		query = new QueryBbs();
-		query.setBoardName(boardName);
+		query.setBoardUrl(boardUrl);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
 		
@@ -145,7 +146,7 @@ public class MainBbsNoticeController {
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("pagination", pagination);
-		model.addAttribute("boardName", boardName);
+		model.addAttribute("boardUrl", boardUrl);
 		model.addAttribute("bbs", bbs);
 		
 		
@@ -156,8 +157,8 @@ public class MainBbsNoticeController {
 	 * 					UPDATE
 	 * ***********************************************/
 	//글 수정하기
-	@RequestMapping(value=prefixAddress+"update.do",method=RequestMethod.GET)
-	public String updateArticle(HttpServletRequest req, Model model) {
+	@RequestMapping(value="/{boardUrl}/update.do",method=RequestMethod.GET)
+	public String updateArticle(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
 		logger.info("bbs/update");
 		//init
 		MainBbs bbs;
@@ -172,12 +173,12 @@ public class MainBbsNoticeController {
 	}
 	
 	//글 수정하기
-	@RequestMapping(value=prefixAddress+"updateAf.do",method=RequestMethod.POST)
-	public String updateAfArticle(MainBbs bbs, Model model) {
+	@RequestMapping(value="/{boardUrl}/updateAf.do",method=RequestMethod.POST)
+	public String updateAfArticle(@PathVariable String boardUrl, MainBbs bbs, Model model) {
 		logger.info("updateAfArticle");
 		
 		//query Set
-		bbs.setBoardName(boardName);
+		bbs.setBoardUrl(boardUrl);
 		
 		//DB set
 		try {
@@ -187,7 +188,7 @@ public class MainBbsNoticeController {
 			logger.error(e.getMessage());
 		}
 		
-		return  "redirect:"+prefixAddress+"list.do";
+		return  "redirect:/"+boardUrl+"/list.do";
 	}
 	
 	
@@ -195,8 +196,8 @@ public class MainBbsNoticeController {
 	 * 					DELETE
 	 * ***********************************************/
 	//글 삭제하기
-	@RequestMapping(value=prefixAddress+"delete.do",method=RequestMethod.GET)
-	public String deleteArticle(HttpServletRequest req, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value="/{boardUrl}/delete.do",method=RequestMethod.GET)
+	public String deleteArticle(@PathVariable String boardUrl, HttpServletRequest req, RedirectAttributes redirectAttributes) {
 		logger.info("/bbs/delete");
 		
 		//삭제
@@ -205,7 +206,7 @@ public class MainBbsNoticeController {
 		//리다이렉트 전달값
 		redirectAttributes.addAttribute("page", req.getParameter("page"));
 		
-		return "redirect:"+prefixAddress+"list.do";
+		return "redirect:/"+boardUrl+"/list.do";
 		
 	}
 	

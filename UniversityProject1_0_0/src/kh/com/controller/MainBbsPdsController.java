@@ -70,7 +70,7 @@ public class MainBbsPdsController {
 		bbsOrgFileName = fileUpload.getOrgFileName();
 		
 		//setup
-        bbs.setBoardName(boardName);
+        bbs.setBoardUrl(boardName);
         bbs.setUserId(userId);
         bbs.setBbsTitle(bbsTitle);
         bbs.setBbsContent(bbsContent);
@@ -101,7 +101,7 @@ public class MainBbsPdsController {
 
 		//질의 설정
 		query = new QueryBbs();
-		query.setBoardName(boardName);
+		query.setBoardUrl(boardName);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
 		
@@ -134,7 +134,7 @@ public class MainBbsPdsController {
 		seq = Integer.parseInt(req.getParameter("seq"));
 		
 		query = new QueryBbs();
-		query.setBoardName(boardName);
+		query.setBoardUrl(boardName);
 		query.setStartArticle(pagination.getStartBbs());
 		query.setEndArticle(pagination.getEndBbs());
 		
@@ -177,7 +177,7 @@ public class MainBbsPdsController {
 		logger.info("updateAfArticle");
 		
 		//query Set
-		bbs.setBoardName(boardName);
+		bbs.setBoardUrl(boardName);
 		
 		//DB set
 		try {

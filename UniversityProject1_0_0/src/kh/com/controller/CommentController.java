@@ -15,7 +15,7 @@ import kh.com.serv.CommentService;
 
 @Controller
 public class CommentController {
-	private static final Logger logger = LoggerFactory.getLogger(MainBbsNoticeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BbsController.class);
 	private static final String prefixAddress = "/comment/";
 	
 	@Autowired

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MainBbs implements Serializable {
 	private static final long serialVersionUID = 1843374038002416069L;
 	
-	private String boardName;
+	private String boardUrl;
 	private int bbsRef;
 	private String bbsReply;
 	private int bbsSeq;
@@ -18,11 +18,12 @@ public class MainBbs implements Serializable {
 	private String bbsStatus;
 	private String bbsWdate;
 	
-	public String getBoardName() {
-		return boardName;
+	
+	public String getBoardUrl() {
+		return boardUrl;
 	}
-	public void setBoardName(String boardName) {
-		this.boardName = boardName;
+	public void setBoardUrl(String boardUrl) {
+		this.boardUrl = boardUrl;
 	}
 	public int getBbsRef() {
 		return bbsRef;
@@ -93,9 +94,9 @@ public class MainBbs implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "MainBBS [boardName=" + boardName + ", bbsRef=" + bbsRef + ", bbsReply=" + bbsReply + ", bbsSeq="
-				+ bbsSeq + ", userId=" + userId + ", bbsTitle=" + bbsTitle + ", bbsContent=" + bbsContent
-				+ ", bbsReadCount=" + bbsReadCount + ", bbsStoredFileName=" + bbsStoredFileName + ", bbsOrgFileName="
-				+ bbsOrgFileName + ", bbsStatus=" + bbsStatus + ", bbsWdate=" + bbsWdate + "]";
+		return "MainBbs [boardUrl=" + boardUrl + ", bbsRef=" + bbsRef + ", bbsReply=" + bbsReply + ", bbsSeq=" + bbsSeq
+				+ ", userId=" + userId + ", bbsTitle=" + bbsTitle + ", bbsContent=" + bbsContent + ", bbsReadCount="
+				+ bbsReadCount + ", bbsStoredFileName=" + bbsStoredFileName + ", bbsOrgFileName=" + bbsOrgFileName
+				+ ", bbsStatus=" + bbsStatus + ", bbsWdate=" + bbsWdate + "]";
 	}
 }

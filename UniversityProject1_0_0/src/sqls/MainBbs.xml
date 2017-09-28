@@ -8,11 +8,11 @@
 	<!-- 게시물 입력 -->
 	<insert id="insertBbs" parameterType="MainBBS" useGeneratedKeys="false">
 		INSERT INTO MAIN_BBS(
-			BOARD_NAME, BBS_REF, BBS_SEQ, USER_ID, BBS_TITLE, 
+			BOARD_URL, BBS_REF, BBS_SEQ, USER_ID, BBS_TITLE, 
 			BBS_CONTENT, BBS_STORED_FILENAME, BBS_ORG_FILENAME
 		)
 		VALUES(
-			#{boardName}, MAIN_BBS_SEQ.NEXTVAL, MAIN_BBS_SEQ.NEXTVAL, #{userId}, #{bbsTitle}, 
+			#{boardUrl}, MAIN_BBS_SEQ.NEXTVAL, MAIN_BBS_SEQ.NEXTVAL, #{userId}, #{bbsTitle}, 
 			#{bbsContent}, #{bbsStoredFileName}, #{bbsOrgFileName}
 		)
 	</insert>
@@ -36,7 +36,7 @@
 				SELECT BBS_REF, BBS_REPLY, BBS_SEQ, USER_ID, BBS_TITLE, BBS_CONTENT, BBS_READCOUNT, BBS_STORED_FILENAME, BBS_ORG_FILENAME, BBS_STATUS, BBS_WDATE, 
 				ROW_NUMBER() OVER (ORDER BY BBS_REF desc, BBS_REPLY ASC) R
 				FROM MAIN_BBS
-				WHERE BOARD_NAME = #{boardName}
+				WHERE BOARD_URL = #{boardUrl}
 				AND BBS_STATUS = 1
 		)
 		WHERE R BETWEEN #{startArticle} and #{endArticle}
@@ -64,7 +64,7 @@
 	<select id="getTotalBbs" parameterType="String" resultType="Integer">
 		SELECT NVL(COUNT(BBS_SEQ), 0)
 		FROM MAIN_BBS
-		WHERE BOARD_NAME = #{boardName}
+		WHERE BOARD_URL = #{boardUrl}
 		AND BBS_STATUS = 1
 	</select>
 	
@@ -73,7 +73,7 @@
 		UPDATE MAIN_BBS
 		SET BBS_TITLE = #{bbsTitle},
 			BBS_CONTENT = #{bbsContent}
-		WHERE BOARD_NAME = #{boardName}
+		WHERE BOARD_URL = #{boardUrl}
 		AND BBS_SEQ = #{bbsSeq}
 	</update>
 	
