@@ -19,16 +19,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
-import kh.com.serv.MainBbsService;
+import kh.com.serv.BbsService;
 import kh.com.util.FileUpload;
 import kh.com.util.Pagination;
 
 @Controller
 public class BbsController {
 	private static final Logger logger = LoggerFactory.getLogger(BbsController.class);
+	//http://springboot.tistory.com/25 예외처리
 	
 	@Autowired
-	MainBbsService serv;
+	BbsService serv;
 	
 	/*************************************************
 	 * 					CREATE
@@ -103,8 +104,8 @@ public class BbsController {
 		//질의 설정
 		query = new QueryBbs();
 		query.setBoardUrl(boardUrl);
-		query.setStartArticle(pagination.getStartBbs());
-		query.setEndArticle(pagination.getEndBbs());
+		query.setStartArticle(pagination.getStartArticle());
+		query.setEndArticle(pagination.getEndArticle());
 		
 		//받아오기
 		bbsList = serv.getBbsList(query);
@@ -120,7 +121,7 @@ public class BbsController {
 	//디테일 화면
 	@RequestMapping(value="/{boardUrl}/detail.do",method=RequestMethod.GET)
 	public String detail(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
-		logger.info("/bbs/detail.do");
+		logger.info("/{}/detail.do", boardUrl);
 		//init
 		Pagination pagination;
 		List<MainBbs> bbsList;
@@ -136,8 +137,8 @@ public class BbsController {
 		
 		query = new QueryBbs();
 		query.setBoardUrl(boardUrl);
-		query.setStartArticle(pagination.getStartBbs());
-		query.setEndArticle(pagination.getEndBbs());
+		query.setStartArticle(pagination.getStartArticle());
+		query.setEndArticle(pagination.getEndArticle());
 		
 		//DB 데이터
 		bbs = serv.getBbs(seq);
@@ -149,8 +150,18 @@ public class BbsController {
 		model.addAttribute("boardUrl", boardUrl);
 		model.addAttribute("bbs", bbs);
 		
+		//매핑
+		if (boardUrl.equals("notice")) {
+			logger.info("noReply");
+			//댓글 없는 곳
+			return "noReplyDetail.tiles";
+			
+		} else {
+			logger.info("Reply");
+			//댓글 있는 곳
+			return "mainBbsDetail.tiles";
+		}
 		
-		return "mainBbsDetail.tiles";
 	}
 	
 	/*************************************************

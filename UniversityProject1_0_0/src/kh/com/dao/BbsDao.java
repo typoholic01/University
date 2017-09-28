@@ -5,7 +5,7 @@ import java.util.List;
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
 
-public interface MainBbsDao {
+public interface BbsDao {
 	
 	/*					CREATE					*/
 	boolean insertBbs(MainBbs dto);

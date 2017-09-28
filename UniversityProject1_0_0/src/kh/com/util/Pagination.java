@@ -4,8 +4,8 @@ public class Pagination {
 
 	private int totalArticle;					//총 게시물
 	private int currPage;						//현재 페이지
-	private int startBbs;					//시작 게시물
-	private int endBbs;						//끝 게시물
+	private int startArticle;					//시작 게시물
+	private int endArticle;						//끝 게시물
 	private int startPage;						//리스트 시작 번호
 	private int endPage;						//리스트 종료 번호
 	private int finalEndPage;					//최종 페이지 번호
@@ -20,11 +20,11 @@ public class Pagination {
 		this.currPage = currPage;
 		
 		//시작 게시물 지정
-		startBbs = articleLimit*(currPage - 1) + 1;
-		if (startBbs == 0) startBbs = 1; 
+		startArticle = articleLimit*(currPage - 1) + 1;
+		if (startArticle == 0) startArticle = 1; 
 		
 		//끝 게시물 지정
-		endBbs = articleLimit*currPage<=totalArticle?articleLimit*currPage:totalArticle;		
+		endArticle = articleLimit*currPage<=totalArticle?articleLimit*currPage:totalArticle;		
 		
 		//시작 페이지 지정
 		startPage = currPage-(currPage-1)%pageLimit;
@@ -62,20 +62,20 @@ public class Pagination {
 		this.currPage = currPage;
 	}
 
-	public int getStartBbs() {
-		return startBbs;
+	public int getStartArticle() {
+		return startArticle;
 	}
 
-	public void setStartBbs(int startBbs) {
-		this.startBbs = startBbs;
+	public void setStartArticle(int startArticle) {
+		this.startArticle = startArticle;
 	}
 
-	public int getEndBbs() {
-		return endBbs;
+	public int getEndArticle() {
+		return endArticle;
 	}
 
-	public void setEndBbs(int endBbs) {
-		this.endBbs = endBbs;
+	public void setEndArticle(int endArticle) {
+		this.endArticle = endArticle;
 	}
 
 	public int getStartPage() {
@@ -107,13 +107,7 @@ public class Pagination {
 	public void setFinalEndPage(int finalEndPage) {
 		this.finalEndPage = finalEndPage;
 	}
-
-	@Override
-	public String toString() {
-		return "Pagination [totalArticle=" + totalArticle + ", currPage=" + currPage + ", startArticle=" + startBbs
-				+ ", endArticle=" + endBbs + ", startPage=" + startPage + ", endPage=" + endPage + ", finalEndPage="
-				+ finalEndPage + ", articleLimit=" + articleLimit + ", pageLimit=" + pageLimit + "]";
-	}
+	
 	
 	
 	

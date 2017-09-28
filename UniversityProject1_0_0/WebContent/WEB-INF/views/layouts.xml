@@ -23,53 +23,33 @@
 	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
-<!-- 		공지 게시판 		-->
+<!-- 		일반형 게시판 		-->
 <!-- 	리스트	 -->
 <definition name="mainBbsList.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsList.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsList.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	글쓰기	 -->
 <definition name="mainBbsWrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsWrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsWrite.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 글수정  -->
 <definition name="mainBbsUpdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsUpdate.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
 <!-- 	디테일	 -->
 <definition name="mainBbsDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/common/bbsDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/common/bbsRightMenu.jsp"/>	
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsDetail.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
 
-<!-- 		자료 게시판 		-->
-<!-- 	리스트	 -->
-<definition name="mainPdsList.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/pdsList.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
-</definition>
-<!-- 	글쓰기	 -->
-<definition name="mainPdsWrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/bbsWrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
-</definition>
-<!-- 	글수정	 -->
-<definition name="mainPdsUpdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/pds/bbsUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
-</definition>
+<!-- 		댓글없는 게시판 		-->
 <!-- 	디테일	 -->
-<definition name="mainPdsDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/pds/bbsDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
-</definition>
-<!-- 	댓글	 -->
-<definition name="mainPdsComment.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/main/bbs/pds/comment.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/main/bbs/pds/bbsRightMenu.jsp"/>	
+<definition name="noReplyDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/noreply/bbsDetail.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
 
 </tiles-definitions>

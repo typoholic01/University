@@ -36,10 +36,10 @@
                 <span>${bbs.bbsContent }</span>
             </div>
             <div class="panel-footer">
-                <span class="label label-default"><a href="./reply.do?seq=${bbs.bbsSeq }">답글</a></span> <span class="label label-default"><a href="./update.do?seq=${bbs.bbsSeq }">수정</a></span> <span class="label label-default"><a href="./delete.do?seq=${bbs.bbsSeq }&page=${param.page}">삭제</a></span>
+                <span class="label label-default"><a href="./update.do?seq=${bbs.bbsSeq }">수정</a></span> <span class="label label-default"><a href="./delete.do?seq=${bbs.bbsSeq }&page=${param.page}">삭제</a></span>
             </div>
         </div>
     </div>
-    <%@ include file="./parts/comment.jsp" %>
+    <%@ include file="./parts/comment.jsp" %>    
     <%@ include file="./parts/bbsListView.jsp" %>
 </section>

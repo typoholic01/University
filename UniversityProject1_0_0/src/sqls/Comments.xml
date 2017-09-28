@@ -11,7 +11,7 @@
 			BBS_SEQ,COMMENT_GROUP_NO,COMMENT_SEQ,USER_ID,COMMENT_CONTENT
 		)
 		VALUES(
-			#{bbsSeq}, MAIN_BBS_SEQ.NEXTVAL, MAIN_BBS_SEQ.NEXTVAL, #{userId}, #{commentContent}
+			#{bbsSeq}, COMMENTS_SEQ.NEXTVAL, COMMENTS_SEQ.NEXTVAL, #{userId}, #{commentContent}
 		)
 	</insert>
 
@@ -19,66 +19,58 @@
 	<!-- 게시물 하나 가져오기 -->
 	<select id="getComment" resultType="CommentDto" parameterType="Integer">
 		SELECT 
-			BBS_REF as bbsRef, 
-			BBS_REPLY as bbsReply, 
 			BBS_SEQ as bbsSeq, 
+			COMMENT_GROUP_NO as commentGroupNo,
+			COMMENT_SHAPE as commentShape,
+			COMMENT_SEQ as commentSeq,
+			COMMENT_STATUS as commentStatus,
 			USER_ID as userId, 
-			BBS_TITLE as bbsTitle, 
-			BBS_CONTENT as bbsContent, 
-			BBS_READCOUNT as bbsReadCount, 
-			BBS_STORED_FILENAME as bbsStoredFileName, 
-			BBS_ORG_FILENAME as bbsOrgFileName, 
-			BBS_STATUS as bbsStatus, 
-			BBS_WDATE as bbsWdate
-		FROM MAIN_BBS
-		WHERE BBS_SEQ = #{bbsSeq}
+			COMMENT_CONTENT as commentContent, 
+			COMMENT_CREATE_AT as commentCreateAt
+		FROM COMMENTS
+		WHERE COMMENT_SEQ = #{commentSeq}
 	</select>
 	
 	<!-- 게시물들 가져오기 -->
 	<select id="getCommentList" resultType="CommentDto" parameterType="QueryComment">
 		SELECT 
-			BBS_REF as bbsRef, 
-			BBS_REPLY as bbsReply, 
 			BBS_SEQ as bbsSeq, 
+			COMMENT_GROUP_NO as commentGroupNo,
+			COMMENT_SHAPE as commentShape,
+			COMMENT_SEQ as commentSeq,
+			COMMENT_STATUS as commentStatus,
 			USER_ID as userId, 
-			BBS_TITLE as bbsTitle, 
-			BBS_CONTENT as bbsContent, 
-			BBS_READCOUNT as bbsReadCount, 
-			BBS_STORED_FILENAME as bbsStoredFileName, 
-			BBS_ORG_FILENAME as bbsOrgFileName, 
-			BBS_STATUS as bbsStatus, 
-			BBS_WDATE as bbsWdate
+			COMMENT_CONTENT as commentContent, 
+			COMMENT_CREATE_AT as commentCreateAt
 		FROM (
-				SELECT BBS_REF, BBS_REPLY, BBS_SEQ, USER_ID, BBS_TITLE, BBS_CONTENT, BBS_READCOUNT, BBS_STORED_FILENAME, BBS_ORG_FILENAME, BBS_STATUS, BBS_WDATE, 
-				ROW_NUMBER() OVER (ORDER BY BBS_REF desc, BBS_REPLY ASC) R
-				FROM MAIN_BBS
-				WHERE BOARD_NAME = #{boardName}
-				AND BBS_STATUS = 1
+				SELECT BBS_SEQ,COMMENT_GROUP_NO,COMMENT_SHAPE,COMMENT_SEQ,COMMENT_STATUS,USER_ID,COMMENT_CONTENT,COMMENT_CREATE_AT,
+					ROW_NUMBER() OVER (ORDER BY COMMENT_GROUP_NO desc, COMMENT_SHAPE ASC) R
+				FROM COMMENTS
+				WHERE BBS_SEQ = #{bbsSeq}
+				AND COMMENT_STATUS = 1
 		)
 		WHERE R BETWEEN #{startArticle} and #{endArticle}
 	</select>
 	
 	<!-- 총 게시물 수 가져오기 -->
-	<select id="getTotalComment" parameterType="String" resultType="Integer">
-		SELECT NVL(COUNT(BBS_SEQ), 0)
-		FROM MAIN_BBS
-		WHERE BOARD_NAME = #{boardName}
-		AND BBS_STATUS = 1
+	<select id="getTotalComment" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(COMMENT_SEQ), 0)
+		FROM COMMENTS
+		WHERE BBS_SEQ = #{bbsSeq}
+		AND COMMENT_STATUS = 1
 	</select>
 	
 	<!-- Update -->
 	<update id="updateComment" parameterType="CommentDto">
-		UPDATE MAIN_BBS
-		SET BBS_TITLE = #{bbsTitle},
-			BBS_CONTENT = #{bbsContent}
-		WHERE BOARD_NAME = #{boardName}
-		AND BBS_SEQ = #{bbsSeq}
+		UPDATE COMMENTS
+		SET COMMENT_CONTENT = #{commentContent}
+		WHERE BBS_SEQ = #{bbsSeq}
 	</update>
 	
 	<!-- 						DELETE 						-->
 	<update id="deleteComment" parameterType="Integer">
-		UPDATE MAIN_BBS
-		SET BBS_STATUS = 0
-		WHERE BBS_SEQ = #{bbsSeq}
+		UPDATE COMMENTS
+		SET COMMENT_STATUS = 0
+		WHERE COMMENT_SEQ = #{commentSeq}
 	</update>
 </mapper>

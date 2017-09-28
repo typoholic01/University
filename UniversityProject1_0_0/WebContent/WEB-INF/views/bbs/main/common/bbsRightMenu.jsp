@@ -10,8 +10,15 @@
 	<div class="widget">
 		<h4>게시판 목록</h4>
 		<ul>
-			<li class="current"><a href="../notice/list.do" title="">공지게시판</a></li>
-			<li><a href="../pds/list.do" title="">자유게시판</a></li>
+			<c:if test="${boardUrl == 'notice' }">
+				<li class="current"> <a href="../notice/list.do" title="">공지게시판</a></li>		
+				<li><a href="../pds/list.do" title="">자유게시판</a></li>	
+			</c:if>
+			<c:if test="${boardUrl == 'pds' }">
+				<li> <a href="../notice/list.do" title="">공지게시판</a></li>		
+				<li class="current"><a href="../pds/list.do" title="">자유게시판</a></li>				
+			</c:if>
+			
 		</ul>
 	</div>
 </aside>

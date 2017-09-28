@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.com.dao.MainBbsDao;
+import kh.com.dao.BbsDao;
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
-import kh.com.serv.MainBbsService;
+import kh.com.serv.BbsService;
 
 @Service
-public class MainBbsServiceImpl implements MainBbsService {
+public class BbsServiceImpl implements BbsService {
 
 	@Autowired
-	MainBbsDao dao;
+	BbsDao dao;
 	
 	@Override
 	public boolean insertBbs(MainBbs dto) {

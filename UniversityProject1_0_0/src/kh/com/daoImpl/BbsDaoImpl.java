@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.com.dao.MainBbsDao;
+import kh.com.dao.BbsDao;
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
 
 @Repository
-public class MainBbsDaoImpl implements MainBbsDao {
-	private static final Logger logger = LoggerFactory.getLogger(MainBbsDaoImpl.class);
+public class BbsDaoImpl implements BbsDao {
+	private static final Logger logger = LoggerFactory.getLogger(BbsDaoImpl.class);
 	private final String ns = "MainBbs.";
 	
 	@Autowired
