@@ -23,6 +23,22 @@
 	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
+<!-- 댓글 있는 디테일 -->
+<definition name="bbsDetail.tiles" template="/WEB-INF/views/comment-layouts-tiles.jsp">
+	<!-- 위 -->
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
+	<!-- 본문 -->
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsDetail.jsp"/>
+	<put-attribute name="comment" value="/WEB-INF/views/bbs/main/common/parts/comment.jsp"/>
+	<put-attribute name="bbsList" value="/WEB-INF/views/bbs/main/common/parts/bbsListView.jsp"/>
+	<!-- 사이드 -->
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>
+	<!-- 아래 -->
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
 <!-- 		일반형 게시판 		-->
 <!-- 	리스트	 -->
 <definition name="mainBbsList.tiles" extends="sub.tiles">
@@ -39,16 +55,11 @@
 	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsUpdate.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
-<!-- 	디테일	 -->
-<definition name="mainBbsDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/common/bbsDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
-</definition>
 
 <!-- 		댓글없는 게시판 		-->
 <!-- 	디테일	 -->
-<definition name="noReplyDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/noreply/bbsDetail.jsp"/>
+<definition name="noCommentBbsDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/bbs/main/no-comment/bbsDetail.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/bbs/main/common/bbsRightMenu.jsp"/>	
 </definition>
 

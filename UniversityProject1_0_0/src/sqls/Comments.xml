@@ -65,6 +65,7 @@
 		UPDATE COMMENTS
 		SET COMMENT_CONTENT = #{commentContent}
 		WHERE BBS_SEQ = #{bbsSeq}
+		AND COMMENT_SEQ = #{commentSeq}
 	</update>
 	
 	<!-- 						DELETE 						-->

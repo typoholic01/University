@@ -54,7 +54,8 @@ function commentUpdate(i) {
 			'<input type="hidden" name="boardUrl" value="${boardUrl}">'
 			+ '<input type="hidden" name="userId" value="asdf" />'
 			+ '<input type="hidden" name="bbsSeq" value="${bbs.bbsSeq}" />'
-			+ '<input type="hidden" name="page" value="${param.page}" />'			
+			+ '<input type="hidden" name="page" value="${param.page}" />'
+			+ '<input type="hidden" name="commentSeq" value="'+i+'" />'			
 	);
  	$("#comment_"+ i + " > div.panel-heading > div").html('');
 	$("#comment_"+ i + " > div.panel-body").html(

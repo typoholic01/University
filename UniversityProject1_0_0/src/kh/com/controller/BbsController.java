@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
+import kh.com.model.QueryComment;
 import kh.com.serv.BbsService;
+import kh.com.serv.CommentService;
 import kh.com.util.FileUpload;
 import kh.com.util.Pagination;
 
@@ -29,7 +31,7 @@ public class BbsController {
 	//http://springboot.tistory.com/25 예외처리
 	
 	@Autowired
-	BbsService serv;
+	BbsService servBbs;
 	
 	/*************************************************
 	 * 					CREATE
@@ -77,7 +79,7 @@ public class BbsController {
         bbs.setBbsStoredFileName(bbsStoredFileName);
         bbs.setBbsOrgFileName(bbsOrgFileName);
         
-		serv.insertBbs(bbs);		
+		servBbs.insertBbs(bbs);		
 		
 		logger.info("insert Done");
 		
@@ -108,7 +110,7 @@ public class BbsController {
 		query.setEndArticle(pagination.getEndArticle());
 		
 		//받아오기
-		bbsList = serv.getBbsList(query);
+		bbsList = servBbs.getBbsList(query);
 		
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
@@ -126,7 +128,7 @@ public class BbsController {
 		Pagination pagination;
 		List<MainBbs> bbsList;
 		MainBbs bbs;
-		QueryBbs query;
+		QueryBbs queryBbs;
 		int seq;
 
 		//페이징
@@ -135,14 +137,14 @@ public class BbsController {
 		//질의 설정
 		seq = Integer.parseInt(req.getParameter("seq"));
 		
-		query = new QueryBbs();
-		query.setBoardUrl(boardUrl);
-		query.setStartArticle(pagination.getStartArticle());
-		query.setEndArticle(pagination.getEndArticle());
+		queryBbs = new QueryBbs();
+		queryBbs.setBoardUrl(boardUrl);
+		queryBbs.setStartArticle(pagination.getStartArticle());
+		queryBbs.setEndArticle(pagination.getEndArticle());
 		
 		//DB 데이터
-		bbs = serv.getBbs(seq);
-		bbsList = serv.getBbsList(query);
+		bbs = servBbs.getBbs(seq);
+		bbsList = servBbs.getBbsList(queryBbs);
 		
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
@@ -152,14 +154,14 @@ public class BbsController {
 		
 		//매핑
 		if (boardUrl.equals("notice")) {
-			logger.info("noReply");
+			logger.info("noComment");
 			//댓글 없는 곳
-			return "noReplyDetail.tiles";
+			return "noCommentBbsDetail.tiles";
 			
 		} else {
-			logger.info("Reply");
+			logger.info("Comment");
 			//댓글 있는 곳
-			return "mainBbsDetail.tiles";
+			return "bbsDetail.tiles";
 		}
 		
 	}
@@ -175,7 +177,7 @@ public class BbsController {
 		MainBbs bbs;
 		
 		//DB get
-		bbs = serv.getBbs(getSeq(req));
+		bbs = servBbs.getBbs(getSeq(req));
 		
 		//요소 추가
 		model.addAttribute("bbs", bbs);
@@ -193,7 +195,7 @@ public class BbsController {
 		
 		//DB set
 		try {
-			serv.updateBbs(bbs);
+			servBbs.updateBbs(bbs);
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -212,7 +214,7 @@ public class BbsController {
 		logger.info("/bbs/delete");
 		
 		//삭제
-		serv.deleteBbs(getSeq(req));
+		servBbs.deleteBbs(getSeq(req));
 		
 		//리다이렉트 전달값
 		redirectAttributes.addAttribute("page", req.getParameter("page"));
@@ -249,7 +251,7 @@ public class BbsController {
 	}
 
 	private int getTotalBbs(String boardName) {
-		return serv.getTotalBbs(boardName);
+		return servBbs.getTotalBbs(boardName);
 	}
 
 }

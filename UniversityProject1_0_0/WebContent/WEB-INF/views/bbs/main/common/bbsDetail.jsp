@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- body -->
-<section class="category-content col-sm-9">
 	<div id="postlist">        
         <div class="panel">
                 <div class="panel-heading">
@@ -40,6 +39,3 @@
             </div>
         </div>
     </div>
-    <%@ include file="./parts/comment.jsp" %>    
-    <%@ include file="./parts/bbsListView.jsp" %>
-</section>
