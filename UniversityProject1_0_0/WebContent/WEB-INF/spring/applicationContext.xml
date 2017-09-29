@@ -34,7 +34,8 @@
 	<!-- DB 설정 (MyBatis == iBatis (framework))-->
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"/>
-		<beans:property name="mapperLocations" value="classpath:sqls/*.xml" />
+		<beans:property name="mapperLocations" value="classpath:sqls/*.xml" />	
+		<beans:property name="configLocation" value="classpath:mybatis-config.xml" />
 	</beans:bean>
 	
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -47,7 +48,3 @@
 	</beans:bean>
 
 </beans:beans>
-
-
-
-

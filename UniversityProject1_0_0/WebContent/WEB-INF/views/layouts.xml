@@ -3,14 +3,102 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-<!-- 메인영역 -->
-<definition name="main.tiles" template="/WEB-INF/views/layouts-tiles.jsp">
+
+<!-- ※ 메인과 서브를 나눈 이유 : 메인과 서브페이지 레이아웃 구조가 달라서 이렇게 나누어놓았어요. -->
+
+<!-- 메인영역  : 메인안에서 이루어지는 영역은 main.tiles를 extends 하시면되요 -->
+<definition name="main.tiles" template="/WEB-INF/views/main_layouts-tiles.jsp">
 	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
 	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
 	<put-attribute name="main" value="/WEB-INF/views/common/main.jsp"/>
 	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
+<!-- 서브영역 : 서브 안에서 이루어지는 영역응ㄴ sub.tiles를 extends 하시면되요 -->
+<definition name="sub.tiles" template="/WEB-INF/views/sub_layouts-tiles.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/common/sub_section.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/common/sub_right_menu.jsp"/>
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+
+
+
+
+<!-- 정혜 -->
+
+<!-- 1.로그인 -->
+<definition name="login.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/login.jsp"/>
+</definition>
+
+<!-- 2.아이디,비밀번호찾기 -->
+<definition name="findId.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/findId.jsp"/>
+</definition>
+<definition name="findPw.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/findPw.jsp"/>
+</definition>
+<definition name="findIdPwAf.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/findIdPwAf.jsp"/>
+</definition>
+
+<!-- 3.회원가입 -->
+<definition name="regi.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<definition name="regiview.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regiview.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="regi_s.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_s.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="regi_p.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_p.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="regi_a.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_a.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<definition name="regiAf.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regiAf.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<!-- 성적입력 -->
+<definition name="classList.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/classlist.jsp"/>
+</definition>
+
+
+<!-- 지윤 -->
+<!-- 인트라넷 -->
+<definition name="intranet.tiles" extends="sub.tiles">
+</definition>
+
+<!-- 교수평가 -->
+<definition name="assessment.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/professor_assessment.jsp"/>
+</definition>
+
+
+
 </tiles-definitions>
+
+
+
+
+
+
 
 
